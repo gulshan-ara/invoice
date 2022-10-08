@@ -3,6 +3,7 @@ const express = require("express");
 const app = express();
 const path = require('path');
 const engine = require('ejs-blocks');
+const db = require('./database');
 
 // set the port
 const port = 3000;
