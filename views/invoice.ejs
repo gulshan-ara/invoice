@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Make Invoice</title>
+    <meta name="description" content="create_invoice">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+        .info {
+            display: flex;
+            justify-content: space-around;
+            font-size: 20px;
+            font-weight: 600;
+        }
+
+        .customer {
+            text-align: center;
+            font-size: 20px;
+            font-weight: 600;
+            padding: 1%;
+        }
+
+        select {
+            width: 20%;
+            text-align: center;
+            padding: 2% auto;
+            font-size: 15px;
+        }
+
+        #btn-select {
+            width: 5%;
+            background-color: white;
+            font-size: 15px;
+        }
+
+        #c_name {
+            font-size: 20px;
+            padding: 1%;
+            margin-left: 0.5%;
+        }
+
+        .prod-table {
+            display: flex;
+            justify-content: flex-start;
+            margin: 5% 15% 5%;
+        }
+
+        th,
+        td {
+            padding: 15px 80px;
+            text-align: center;
+            border: 1px solid #ddd;
+        }
+
+        td {
+            font-size: 15px;
+        }
+
+        .add-prod {
+            margin: 5% 13% 5%;
+            font-size: 20px;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .add-prod input {
+            margin-right: 4%;
+        }
+
+        .add-prod button{
+            margin: 0% 0% 0% 1%;
+            font-size: 15px;
+        }
+    </style>
+</head>
+
+<body>
+    <article class="info">
+        <p>Invoice number : xxxxxx</p>
+        <p>Invoice date : <span id="current_date"></span></p>
+    </article>
+
+    <article class="customer">
+        <span>Customer : </span>
+        <span id="c_name"></span>
+        <select id="cars" name="cars">
+            <option value="Volvo">Volvo</option>
+            <option value="saab">Saab</option>
+            <option value="fiat">Fiat</option>
+            <option value="audi">Audi</option>
+        </select>
+        <button onclick="select()" id="btn-select">select</button>
+    </article>
+
+    <table class="prod-table" id="prod-table">
+        <tr>
+            <th>product name</th>
+            <th>unit price</th>
+            <th>quantity</th>
+            <th>total</th>
+        </tr>
+    </table>
+
+    <article action="" class="add-prod">
+        <label for="name">Product name : </label>
+        <input type="text" id="name">
+        <label for="unit-price">Unit Price :</label>
+        <input type="text" id="unit-price">
+        <label for="quantity">Quantity :</label>
+        <input type="text" id="quantity">
+        <button onclick="addProd()">Add product</button>
+    </article>
+
+
+    <script>
+        date = new Date();
+        year = date.getFullYear();
+        month = date.getMonth() + 1;
+        day = date.getDate();
+        document.getElementById("current_date").innerHTML = month + "/" + day + "/" + year;
+
+        function select() {
+            document.getElementById("c_name").innerHTML = `${document.getElementById("cars").value}`;
+            document.getElementById("cars").style.display = "none";
+            document.getElementById("btn-select").style.display = "none";
+            document.getElementById("c_name").style.display = "float";
+        };
+
+        function addProd() {
+            var table = document.getElementById("prod-table");
+            var row = table.insertRow(1);
+            var cell1 = row.insertCell(0);
+            var cell2 = row.insertCell(1);
+            var cell3 = row.insertCell(2);
+            var cell4 = row.insertCell(3);
+            cell1.innerHTML = "NEW CELL1";
+            cell2.innerHTML = "NEW CELL2";
+            cell3.innerHTML = "NEW CELL3";
+            cell4.innerHTML = "NEW CELL4";
+        }
+    </script>
+</body>
+
+</html>

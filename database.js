@@ -6,8 +6,8 @@ const con = mysql.createConnection({
   database: 'invoice_project' // // Replace with your database Name
 }); 
  
-con.connect(function(err) {
-  if (err) throw err;
-  console.log(`Database is connected successfully !`);
-});
+// con.connect(function(err) {
+//   if (err) throw err;
+//   console.log(`Database is connected successfully !`);
+// });
 module.exports = con;

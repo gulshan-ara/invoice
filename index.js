@@ -24,6 +24,10 @@ app.get('/', function(req, res) {
     res.render('index');
 });
 
+app.get('/Invoice', function(req, res) {
+    res.render('invoice');
+});
+
 app.get('/Customers', function(req, res) {
     db.query("select * from Customers", function(err, result) {
         if (err) throw err;
