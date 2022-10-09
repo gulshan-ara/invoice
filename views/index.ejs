@@ -1,27 +1,49 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <title>Invoice</title>
-        <meta name="description" content="Invoice">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <style>
-            .container{
-                display: flex;
-                justify-content: center;
-                margin: 20% 20%;
-            }
-            button{
-                margin: 5%;
-                padding: 2%;
-            }
-        </style>
-    </head>
-    <body>
-        <div class="container">
-            <button><a href="/Invoice">Make A New Invoice</a></button>
-            <!-- <button>Show Existing Invoices</button> -->
-        </div>
-    </body>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Invoice</title>
+    <meta name="description" content="Invoice">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+        .container {
+            display: flex;
+            justify-content: center;
+            margin: 20% 20%;
+        }
+
+        button {
+            margin: 5%;
+            padding: 2%;
+        }
+
+        /* .add-customer {
+            margin: 2% 25%;
+            padding: 0 5%;
+        }
+
+        .form-field {
+            font-size: 15px;
+            padding: 5px;
+            text-align: center;
+            margin: 2%;
+        } */
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <button><a href="/Invoice">Make A New Invoice</a></button>
+        <button>Show All Invoices</button>
+        <button><a href="/Customers">Customers</a></button>
+    </div>
+    <!-- <form action="/save" method="post" class="add-customer">
+        <input type="text" name="name" placeholder="Enter Name" class="form-field">
+        <input type="text" name="contact" placeholder="Contact Number" class="form-field">
+        <button class="form-field">Add Customer</button>
+    </form> -->
+</body>
+
 </html>

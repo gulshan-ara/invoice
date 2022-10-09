@@ -28,8 +28,12 @@ app.get('/Invoice', function(req, res) {
     res.render('invoice');
 });
 
+// app.get('/Customers', function(req, res){
+//     res.render('customer');
+// });
+
 app.get('/Customers', function(req, res) {
-    db.query("select * from Customers", function(err, result) {
+    db.query("select * from Customer", function(err, result) {
         if (err) throw err;
         else {
             obj = { print: result };
@@ -37,6 +41,26 @@ app.get('/Customers', function(req, res) {
         }
     })
 })
+
+app.post('/save', function(req, res) {
+
+    const name = req.body.name;
+    const contact = req.body.contact;
+
+    const insertQuery = `
+            INSERT INTO Customer(name, phone) VALUES("${name}", "${contact}");
+    `;
+
+    db.query(insertQuery, function(err, rows, fields) {
+        if (!!err) {
+            console.log("error", +err);
+        } else {
+            console.log("Record inserted");
+            res.redirect('/Customers');
+        }
+    });
+
+});
 
 // bind and listen the connections on the specified host and port
 app.listen(port, () => {
