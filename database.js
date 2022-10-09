@@ -2,7 +2,7 @@ const mysql = require('mysql');
 const con = mysql.createConnection({
   host: 'localhost', // Replace with your host name
   user: 'root',      // Replace with your database username
-  password: '', // Replace with your database password
+  password: 'AnaN%%2016##', // Replace with your database password
   database: 'invoice_project' // // Replace with your database Name
 }); 
  
