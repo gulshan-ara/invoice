@@ -10,7 +10,7 @@ const db = require('./database');
 
 
 // set the port
-const port = process.env.PORT || 3000;
+// const port = process.env.PORT || 3000;
 
 // tell app to use ejs 
 app.set('view engine', 'ejs');
@@ -224,6 +224,4 @@ app.get('/InvoiceList', function(req, res){
 });
 
 // bind and listen the connections on the specified host and port
-app.listen(port, () => {
-    console.log(`listening on port ${port}!!`)
-});
+app.listen(process.env.PORT || 3000);
