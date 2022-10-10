@@ -68,7 +68,7 @@
             margin-right: 4%;
         }
 
-        .add-prod button{
+        .add-prod button {
             margin: 0% 0% 0% 1%;
             font-size: 15px;
         }
@@ -84,11 +84,13 @@
     <article class="customer">
         <span>Customer : </span>
         <span id="c_name"></span>
-        <select id="cars" name="cars">
-            <option value="Volvo">Volvo</option>
-            <option value="saab">Saab</option>
-            <option value="fiat">Fiat</option>
-            <option value="audi">Audi</option>
+        <select id="names" name="names">
+            <% print.forEach(function(result) { %>
+                <option value="<%= result.name%>">
+                    <%= result.name%>
+                </option>
+                <% }); %>
+
         </select>
         <button onclick="select()" id="btn-select">select</button>
     </article>
@@ -112,6 +114,8 @@
         <button onclick="addProd()">Add product</button>
     </article>
 
+    <!-- <a href="/value">Submit</a> -->
+    <button><a href="/Customers">Customers</a></button>
 
     <script>
         date = new Date();
@@ -121,24 +125,25 @@
         document.getElementById("current_date").innerHTML = month + "/" + day + "/" + year;
 
         function select() {
-            document.getElementById("c_name").innerHTML = `${document.getElementById("cars").value}`;
-            document.getElementById("cars").style.display = "none";
+            document.getElementById("c_name").innerHTML = `${document.getElementById("names").value}`;
+            document.getElementById("names").style.display = "none";
             document.getElementById("btn-select").style.display = "none";
             document.getElementById("c_name").style.display = "float";
         };
 
         function addProd() {
-            var table = document.getElementById("prod-table");
-            var row = table.insertRow(1);
-            var cell1 = row.insertCell(0);
-            var cell2 = row.insertCell(1);
-            var cell3 = row.insertCell(2);
-            var cell4 = row.insertCell(3);
-            cell1.innerHTML = "NEW CELL1";
-            cell2.innerHTML = "NEW CELL2";
-            cell3.innerHTML = "NEW CELL3";
-            cell4.innerHTML = "NEW CELL4";
+            const table = document.getElementById("prod-table");
+            const row = table.insertRow(1);
+            const prod_name = row.insertCell(0);
+            const unit_price = row.insertCell(1);
+            const quantity = row.insertCell(2);
+            const total = row.insertCell(3);
+            prod_name.innerHTML = document.getElementById("name").value;
+            unit_price.innerHTML = document.getElementById("unit-price").value;
+            quantity.innerHTML = document.getElementById("quantity").value;
+            total.innerHTML = parseFloat(unit_price.innerHTML) * parseFloat(quantity.innerHTML);
         }
+
     </script>
 </body>
 
