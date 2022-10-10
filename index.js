@@ -10,7 +10,7 @@ const db = require('./database');
 
 
 // set the port
-const port = 3000;
+const port = process.env.PORT || 3000;
 
 // tell app to use ejs 
 app.set('view engine', 'ejs');
