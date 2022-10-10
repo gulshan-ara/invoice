@@ -6,7 +6,7 @@ const engine = require('ejs-blocks');
 const bodyParser = require('body-parser');
 
 const db = require('./database');
-const con = require("./database");
+
 
 
 // set the port
@@ -25,11 +25,17 @@ app.get('/', function(req, res) {
     res.render('index');
 });
 
-app.get('/value', function(req, res) {
-    res.render('value');
-});
 
 app.get('/Invoice', function(req, res) {
+    
+    let key = Date.now();
+
+    let date = new Date();
+    let year = date.getFullYear();
+    let month = date.getMonth() + 1;
+    let  day = date.getDate();
+    let curr_date = month + "/" + day + "/" + year;
+    
     const readQuery = `
             SELECT * FROM Customer;
     `;
@@ -37,15 +43,17 @@ app.get('/Invoice', function(req, res) {
     db.query(readQuery, function(err, result) {
         if (err) throw err;
         else {
-            obj = { print: result };
-            res.render("invoice", obj);
+            obj = { print: result, key, curr_date };
+            res.render("invoiceEntry", obj);
         }
-    })
+    });
 });
 
-// app.get('/Customers', function(req, res){
-//     res.render('customer');
-// });
+app.get('/Invoice/:number', function(req, res) {
+    const { number } = req.params;
+    res.render('invoice', { number });
+});
+
 
 app.get('/Customers', function(req, res) {
     const readQuery = `
@@ -58,7 +66,7 @@ app.get('/Customers', function(req, res) {
             obj = { print: result };
             res.render("customer", obj);
         }
-    })
+    });
 })
 
 app.post('/save', function(req, res) {
@@ -72,7 +80,7 @@ app.post('/save', function(req, res) {
 
     db.query(insertQuery, function(err, rows, fields) {
         if (!!err) {
-            console.log("error", +err);
+            console.log("error", err);
         } else {
             console.log("Record inserted");
             res.redirect('/Customers');
@@ -81,7 +89,7 @@ app.post('/save', function(req, res) {
 
 });
 
-let edit = 0;
+
 app.get('/update', function(req, res) {
     const updateQuery = `SELECT * FROM Customer WHERE loginId = ${[req.query.id]};`;
 
@@ -133,13 +141,49 @@ app.get('/delete', function(req, res) {
     db.query(del_query, function(err, rows, fields) {
 
         if (!!err) {
-            console.log('Error', +err);
+            console.log('Error', err);
         } else {
             console.log("record deleted");
             return res.redirect('/Customers');
         }
     });
 });
+
+
+app.post('/saveOrder', function(req, res) {
+    const keyVal = req.body.keyVal;
+    console.log(keyVal);
+    const name = req.body.name;
+    const unitPrice = parseFloat(req.body.unitPrice);
+    const quantity = parseFloat(req.body.quantity);
+
+    const sql = `INSERT INTO OrderTable(keyVal, prodName, unitPrice, quantity) VALUES (${keyVal}, "${name}", ${unitPrice}, ${quantity})`;
+
+    db.query(sql, function(err, rows, fields) {
+        if (!!err) {
+            console.log("error", err);
+        } else {
+            const number = { keyVal, name, unitPrice, quantity };
+            res.render('invoice', { number });
+        }
+    });
+});
+
+app.post('/saveInvoice', function(req, res) {
+    const date_invoice = `${req.body.date}`;
+    const keyVal = req.body.keyVal;
+    console.log(keyVal);
+    let sql = `INSERT INTO Invoice(invoiceDate, keyVal, customerName) Values("${date_invoice}", "${keyVal}", "later");`;
+    
+    db.query(sql, function(err, rows, fields) {
+        if (!!err) {
+            console.log("error", err);
+        } else {
+            res.redirect('/');
+        }
+    });
+
+})
 
 // bind and listen the connections on the specified host and port
 app.listen(port, () => {

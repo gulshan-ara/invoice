@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Make Invoice</title>
+    <meta name="description" content="create_invoice">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+        .info {
+            display: flex;
+            justify-content: space-around;
+            font-size: 20px;
+            font-weight: 600;
+        }
+
+        .customers {
+            text-align: center;
+            font-size: 20px;
+            font-weight: 600;
+            padding: 1%;
+            margin: 2% auto;
+        }
+
+        select {
+            width: 20%;
+            text-align: center;
+            padding: 2% auto;
+            font-size: 15px;
+        }
+
+        .add-prod {
+            margin: 5% 13% 5%;
+            font-size: 20px;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .add-prod input {
+            margin-right: 4%;
+        }
+
+        .add-prod button {
+            margin: 0% 0% 0% 1%;
+            font-size: 15px;
+        }
+
+        .btnInvoice {
+            margin: 5% 45%;
+            width: 10%;
+        }
+    </style>
+</head>
+
+<body>
+
+    <section class="info">
+        <p>Invoice number : <%= key %>
+        </p>
+        <p>Invoice date : <%= curr_date %>
+        </p>
+    </section>
+
+    <section class="customers">
+        <select>
+            <% print.forEach(function(result) { %>
+                <option value="<%= result.name%>">
+                    <%= result.name%>
+                </option>
+                <% }); %>
+        </select>
+    </section>
+
+    <form action="/saveOrder" method="post" class="add-prod">
+        <label for="name">Product name : </label>
+        <input type="text" id="name" name="name">
+        <label for="unit-price">Unit Price :</label>
+        <input type="text" id="unit-price" name="unitPrice">
+        <label for="quantity">Quantity :</label>
+        <input type="text" id="quantity" name="quantity">
+        <input type="hidden" name="keyVal" value="<%=key%>">
+        <button>Add product</button>
+    </form>
+
+    <form action="/saveInvoice" method="post">
+        <input type="hidden" value="<%= key %>" name="keyVal">
+        <input type="hidden" value="<%= curr_date%>" name="date">
+        <button class="btnInvoice">Add Invoice</button>
+    </form>
+</body>
+
+</html>

@@ -26,10 +26,20 @@ con.connect(function(err) {
             CREATE TABLE if not exists Invoice(
             invoiceId INT AUTO_INCREMENT,
             customerName VARCHAR(255) NOT NULL,
-            invoiceDate CHAR(11) NOT NULL,
-            products JSON NOT NULL,
+            invoiceDate CHAR(20) NOT NULL,
+            keyVal VARCHAR(255) NOT NULL,
             PRIMARY KEY (invoiceID) 
     )`;
+
+    const create_order = `
+        CREATE TABLE if not exists OrderTable (
+        orderID INT AUTO_INCREMENT, 
+        keyVal VARCHAR(255) NOT NULL,
+        prodName VARCHAR(255) NOT NULL,
+        unitPrice FLOAT(30) NOT NULL,
+        quantity FLOAT(30) NOT NULL,
+        PRIMARY KEY (orderID)
+    );`
 
     con.query(create_customer, function(err, results, fields) {
         if (err) {
@@ -38,9 +48,16 @@ con.connect(function(err) {
     });
 
     con.query(create_invoice, function(err, results, fields) {
-      if (err) {
-          console.log(err.message);
-      }
-  });
+        if (err) {
+            console.log(err.message);
+        }
+    });
+
+    con.query(create_order, function(err, results, fields) {
+        if (err) {
+            console.log(err.message);
+        }
+    });
 });
+
 module.exports = con;
