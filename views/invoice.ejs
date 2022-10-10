@@ -1,13 +1,25 @@
->
+<!DOCTYPE html>
+
 <html>
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <title>Invoice <%= number%></title>
+        <title>Invoice |  </title>
         <meta name="viewport" content="width=device-width, initial-scale=1">
+        <style>
+            body{
+                text-align: center;
+                margin: 2%;
+                padding: 5%;
+            }
+        </style>
     </head>
     <body>
-        <h1>We are in Invoice <%= number.keyVal  %> </h1>
-        <p>we are checking <%= number.name  %></p>
+        <% print.forEach(function(result) { %>
+            <h1>Welcome to Invoice <%= result.keyVal %> </h1>
+            <h2>Invoice Creation Date : <%= result.invoiceDate %></h2>
+            <button><a href="Invoice/<%= result.keyVal%>/orders">Show All Orders</a></button>
+        <% }); %> 
+        
     </body>
 </html>

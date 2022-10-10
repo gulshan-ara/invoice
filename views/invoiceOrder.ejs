@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>Invoice | Order </title>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <style>
+            .title{
+                text-align: center;
+                margin: 2%;
+                padding: 2%;
+            }
+            .order{
+                margin: 2% 20%;
+                padding: 2%;
+            }
+            .total{
+                font-size: 20px;
+                font-weight: 700;
+            }
+        </style>
+    </head>
+    <body>
+        <h2 class="title">Order Details of Invoice Number : <%= number %> </h2>
+        <section class="order">
+        <% let total = 0; %> 
+        <% print.forEach(function(result) { %>
+            <h2>Product Name : <%= result.prodName %></h2>
+            <h4>Unit Price : <%= result.unitPrice %> INR</h4>
+            <h4>Quantity : <%= result.quantity %></h4>
+            <h4>Total price : <%= result.unitPrice * result.quantity%> INR</h4>
+            <% total = total + parseFloat(result.unitPrice * result.quantity); %> 
+            <hr>
+        <% }); %> 
+        <p class="total">Total Price of this Invoice is <%= total %> INR!</p>
+        </section>
+    </body>
+</html>

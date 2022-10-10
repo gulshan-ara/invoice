@@ -50,8 +50,34 @@ app.get('/Invoice', function(req, res) {
 });
 
 app.get('/Invoice/:number', function(req, res) {
+
     const { number } = req.params;
-    res.render('invoice', { number });
+    let sql = `SELECT*FROM Invoice WHERE keyVal = ${number};`;
+    let sqlOrder = `SELECT*FROM OrderTable WHERE keyVal = ${number};`
+
+    db.query(sql, function(err, result) {
+        if (err) throw err;
+        else {
+            obj = { print: result };
+            res.render('invoice', obj);
+        }
+    });
+ 
+});
+
+app.get('/Invoice/Invoice/:number/orders', function(req, res) {
+
+    const { number } = req.params;
+    let sqlOrder = `SELECT*FROM OrderTable WHERE keyVal = ${number};`
+    
+    db.query(sqlOrder, function(err, result) {
+        if (err) throw err;
+        else {
+            obj = { print: result, number};
+            res.render('invoiceOrder', obj);
+        }
+    });
+ 
 });
 
 
@@ -163,8 +189,8 @@ app.post('/saveOrder', function(req, res) {
         if (!!err) {
             console.log("error", err);
         } else {
-            const number = { keyVal, name, unitPrice, quantity };
-            res.render('invoice', { number });
+            const order = { keyVal, name, unitPrice, quantity };
+            res.render('orderRecipt', { order });
         }
     });
 });
@@ -183,7 +209,19 @@ app.post('/saveInvoice', function(req, res) {
         }
     });
 
-})
+});
+
+app.get('/InvoiceList', function(req, res){
+    let sql = `SELECT keyVal FROM Invoice;`;
+
+    db.query(sql, function(err, result){
+        if (err) throw err;
+        else {
+            obj = { print: result };
+            res.render("list", obj)
+        }
+    });
+});
 
 // bind and listen the connections on the specified host and port
 app.listen(port, () => {

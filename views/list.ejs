@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>All Invoice List</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <style>
+            body{
+                text-align: center;
+                margin: 2% 32%;
+                padding: 5%;
+                font-size: 20px;
+            }
+
+            li{
+                margin: 5% 0%;
+                padding: 2% 0%;
+            }
+
+        </style>
+    </head>
+    <body>
+        <ul>
+            <strong>Invoice lists : </strong>
+            <% print.forEach(function(result) { %>
+                <li><a href="/Invoice/<%= result.keyVal %> ">Invoice Number : <%= result.keyVal %> </a></li>
+            <% }); %> 
+        </ul>
+    </body>
+</html>

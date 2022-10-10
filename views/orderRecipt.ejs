@@ -1,0 +1,29 @@
+>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>Invoice <%= order.keyVal%></title>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <style>
+            *{
+                text-align: center;
+            }
+
+            body{
+                margin: 10%;
+            }
+            h2 p{
+                margin: 2%;
+                padding: 1%;
+            }
+        </style>
+    </head>
+    <body>
+        <h2>Invoice <%= order.keyVal %> On Process</h2>
+        <p>Order inserted for <strong> Product : <%= order.name %>, Quantity : <%= order.quantity %>  </strong></p>
+        <p>Unit Price of <strong>Product : <%= order.name %> is <%= order.unitPrice %> </strong></p>
+        <p>Total Price for this Order is <strong><%= order.unitPrice * order.quantity %> INR!</strong> </p>
+        <h3>Press Backward arrow for adding more orderitems in Invoice <%= order.keyVal %></h3>
+    </body>
+</html>
